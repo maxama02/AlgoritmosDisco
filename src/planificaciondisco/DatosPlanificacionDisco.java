@@ -5,17 +5,45 @@
  */
 package planificaciondisco;
 
+import Controlador.ControladorPlanificadorDisco;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author ADMIN
+ * @author Max Mena
  */
 public class DatosPlanificacionDisco extends javax.swing.JFrame {
+
+    /**
+     * Declaracion de variables
+     */
+    public ControladorPlanificadorDisco controlador;
+    DefaultTableModel tableModel;
+    String[] columnNames = {"Sol Disco"};
+    ArrayList listaSolicitudes;
 
     /**
      * Creates new form DatosPlanificacionDisco
      */
     public DatosPlanificacionDisco() {
+
+        controlador = new ControladorPlanificadorDisco();
+        tableModel = new DefaultTableModel();
+        listaSolicitudes= new ArrayList();
         initComponents();
+    }
+
+    public void rellenaLista(ArrayList lista) {
+
+        this.tableModel.setColumnIdentifiers(columnNames);
+        Object[] fila = new Object[tableModel.getColumnCount()];
+        for (int i = 0; i < lista.size(); i++) {
+            fila[i]=lista.get(i);
+            tableModel.addRow(fila);
+        }
+        this.TblLista.setModel(tableModel);
     }
 
     /**
@@ -27,21 +55,129 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNumeroConsulta = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblLista = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        txtUbicCabeza = new javax.swing.JFormattedTextField();
+        btnAgrega = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtTamanoDisco = new javax.swing.JFormattedTextField();
+        btnEjecutar = new javax.swing.JButton();
+        btnBorrarTodo = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Planificador de Disco");
+
+        jLabel2.setText("Cosultas al disco:");
+
+        txtNumeroConsulta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        TblLista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(TblLista);
+
+        jLabel3.setText("Direccion de Cabeza:");
+
+        txtUbicCabeza.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        btnAgrega.setText("+");
+        btnAgrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregaActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Tamaño del Disco:");
+
+        txtTamanoDisco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        btnEjecutar.setText("Ejecutar");
+
+        btnBorrarTodo.setText("Borrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtTamanoDisco, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtUbicCabeza, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtNumeroConsulta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnAgrega)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEjecutar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBorrarTodo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTamanoDisco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgrega))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtUbicCabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEjecutar)
+                    .addComponent(btnBorrarTodo))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    /**
+     * Boton que agrega datos a la lista
+     *
+     * @param evt
+     */
+    private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
+        //controlador.AgregaDatosLista(parseInt(this.txtNumeroConsulta.getText()));
+        
+        listaSolicitudes.add(txtNumeroConsulta.getText());
+        //rellena la lista
+        //rellenaLista(controlador.RetornaDatoslista());
+        rellenaLista(listaSolicitudes);
+        txtNumeroConsulta.setValue(null);
+    }//GEN-LAST:event_btnAgregaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +215,17 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TblLista;
+    private javax.swing.JButton btnAgrega;
+    private javax.swing.JButton btnBorrarTodo;
+    private javax.swing.JButton btnEjecutar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JFormattedTextField txtNumeroConsulta;
+    private javax.swing.JFormattedTextField txtTamanoDisco;
+    private javax.swing.JFormattedTextField txtUbicCabeza;
     // End of variables declaration//GEN-END:variables
 }
