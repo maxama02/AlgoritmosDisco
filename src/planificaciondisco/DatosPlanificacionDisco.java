@@ -5,11 +5,16 @@
  */
 package planificaciondisco;
 
+<<<<<<< HEAD
 import Clases.Solicitudes;
+=======
+import Clases.Disco;
+>>>>>>> prueba
 import Controlador.ControladorPlanificadorDisco;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -18,25 +23,27 @@ import javax.swing.table.DefaultTableModel;
 public class DatosPlanificacionDisco extends javax.swing.JFrame {
 
     /**
-     * Declaracion de variables
+     * declaracion de variables
      */
+<<<<<<< HEAD
     public ControladorPlanificadorDisco controlador;
     DefaultTableModel tableModel;
     String[] columnNames = {"Solicitud discos"};
     ArrayList listaSolicitudes;
     //Solicitudes dat;
 
+=======
+    ArrayList <Disco> lista;
+>>>>>>> prueba
     /**
      * Creates new form DatosPlanificacionDisco
      */
     public DatosPlanificacionDisco() {
-
-        controlador = new ControladorPlanificadorDisco();
-        tableModel = new DefaultTableModel();
-        listaSolicitudes= new ArrayList();
         initComponents();
-    }
+        lista =new ArrayList<Disco>();
+        defineAnchoTabla();
 
+<<<<<<< HEAD
     public void rellenaTabla(ArrayList lista2) {
         ArrayList lista = lista2;
         this.tableModel.setColumnIdentifiers(columnNames);
@@ -44,9 +51,30 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         for (Object list:lista){//int i = 0; i < lista.size(); i++) {
             //fila[i]=lista.get(i);
             tableModel.addRow();
-        }
-        this.TblLista.setModel(tableModel);
+=======
     }
+    public void imprime(ArrayList<Disco> d){//la lista esta Guardando bien
+        for(int i=0; i<d.size();i++){
+            System.out.println(d.get(i).getData());
+            System.out.println("$$$$$$$$$$");
+>>>>>>> prueba
+        }
+    }
+    void defineAnchoTabla(){
+        TableColumn columna;
+        columna=this.TblLista.getColumnModel().getColumn(0);
+        columna.setPreferredWidth(50);
+        
+       TblLista.getTableHeader().setReorderingAllowed(false);
+       TblLista.getTableHeader().setResizingAllowed(false);
+    }
+    public void Listar(){
+        for(int i=0; i<lista.size();i++){
+            TblLista.setValueAt(lista.get(i).getData(), i, 0);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,6 +200,7 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      * @param evt
      */
     private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
+<<<<<<< HEAD
         
         int dts= parseInt(this.txtNumeroConsulta.getText());
         
@@ -179,6 +208,12 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         
         //borrar los datos
         txtNumeroConsulta.setValue(null);
+=======
+        int d =parseInt( this.txtNumeroConsulta.getText());
+        lista.add(new Disco(d));
+        //imprime(lista);
+        Listar();
+>>>>>>> prueba
     }//GEN-LAST:event_btnAgregaActionPerformed
 
     /**
