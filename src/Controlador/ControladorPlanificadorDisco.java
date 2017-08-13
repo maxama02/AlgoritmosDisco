@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Clases.Solicitudes;
 import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,8 +28,9 @@ public class ControladorPlanificadorDisco {
         listaSolicitudes = new ArrayList();
     }
 
-    public void AgregaDatosLista(int dato) {
+    public ArrayList AgregaDatosLista(Solicitudes dato) {
         listaSolicitudes.add(dato);
+        return listaSolicitudes;
     }
 
     public ArrayList RetornaDatoslista() {

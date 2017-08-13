@@ -5,6 +5,7 @@
  */
 package planificaciondisco;
 
+import Clases.Solicitudes;
 import Controlador.ControladorPlanificadorDisco;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -21,8 +22,9 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      */
     public ControladorPlanificadorDisco controlador;
     DefaultTableModel tableModel;
-    String[] columnNames = {"Sol Disco"};
+    String[] columnNames = {"Solicitud discos"};
     ArrayList listaSolicitudes;
+    //Solicitudes dat;
 
     /**
      * Creates new form DatosPlanificacionDisco
@@ -35,13 +37,13 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void rellenaLista(ArrayList lista) {
-
+    public void rellenaTabla(ArrayList lista2) {
+        ArrayList lista = lista2;
         this.tableModel.setColumnIdentifiers(columnNames);
         Object[] fila = new Object[tableModel.getColumnCount()];
-        for (int i = 0; i < lista.size(); i++) {
-            fila[i]=lista.get(i);
-            tableModel.addRow(fila);
+        for (Object list:lista){//int i = 0; i < lista.size(); i++) {
+            //fila[i]=lista.get(i);
+            tableModel.addRow();
         }
         this.TblLista.setModel(tableModel);
     }
@@ -170,12 +172,12 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      * @param evt
      */
     private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
-        //controlador.AgregaDatosLista(parseInt(this.txtNumeroConsulta.getText()));
         
-        listaSolicitudes.add(txtNumeroConsulta.getText());
-        //rellena la lista
-        //rellenaLista(controlador.RetornaDatoslista());
-        rellenaLista(listaSolicitudes);
+        int dts= parseInt(this.txtNumeroConsulta.getText());
+        
+        rellenaTabla(controlador.AgregaDatosLista(new Solicitudes(dts)));
+        
+        //borrar los datos
         txtNumeroConsulta.setValue(null);
     }//GEN-LAST:event_btnAgregaActionPerformed
 
