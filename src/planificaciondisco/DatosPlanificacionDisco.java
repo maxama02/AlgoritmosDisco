@@ -5,15 +5,13 @@
  */
 package planificaciondisco;
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 import Clases.Solicitudes;
-=======
+=======*/
 import Clases.Disco;
->>>>>>> prueba
-import Controlador.ControladorPlanificadorDisco;
+//>>>>>>> prueba
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -25,16 +23,9 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     /**
      * declaracion de variables
      */
-<<<<<<< HEAD
-    public ControladorPlanificadorDisco controlador;
-    DefaultTableModel tableModel;
-    String[] columnNames = {"Solicitud discos"};
-    ArrayList listaSolicitudes;
-    //Solicitudes dat;
 
-=======
     ArrayList <Disco> lista;
->>>>>>> prueba
+//>>>>>>> prueba
     /**
      * Creates new form DatosPlanificacionDisco
      */
@@ -43,21 +34,13 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         lista =new ArrayList<Disco>();
         defineAnchoTabla();
 
-<<<<<<< HEAD
-    public void rellenaTabla(ArrayList lista2) {
-        ArrayList lista = lista2;
-        this.tableModel.setColumnIdentifiers(columnNames);
-        Object[] fila = new Object[tableModel.getColumnCount()];
-        for (Object list:lista){//int i = 0; i < lista.size(); i++) {
-            //fila[i]=lista.get(i);
-            tableModel.addRow();
-=======
+
     }
     public void imprime(ArrayList<Disco> d){//la lista esta Guardando bien
         for(int i=0; i<d.size();i++){
             System.out.println(d.get(i).getData());
             System.out.println("$$$$$$$$$$");
->>>>>>> prueba
+//>>>>>>> prueba
         }
     }
     void defineAnchoTabla(){
@@ -200,7 +183,7 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      * @param evt
      */
     private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
-<<<<<<< HEAD
+/*<<<<<<< HEAD
         
         int dts= parseInt(this.txtNumeroConsulta.getText());
         
@@ -208,12 +191,12 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         
         //borrar los datos
         txtNumeroConsulta.setValue(null);
-=======
+=======*/
         int d =parseInt( this.txtNumeroConsulta.getText());
         lista.add(new Disco(d));
         //imprime(lista);
         Listar();
->>>>>>> prueba
+//>>>>>>> prueba
     }//GEN-LAST:event_btnAgregaActionPerformed
 
     /**
