@@ -5,10 +5,12 @@
  */
 package planificaciondisco;
 
+import Clases.Disco;
 import Controlador.ControladorPlanificadorDisco;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -17,42 +19,39 @@ import javax.swing.table.DefaultTableModel;
 public class DatosPlanificacionDisco extends javax.swing.JFrame {
 
     /**
-     * Declaracion de variables
+     * declaracion de variables
      */
-    public ControladorPlanificadorDisco controlador;
-    DefaultTableModel tableModel;
-    String[] columnNames = {"Solicitudes Disco"};
-    ArrayList  listaSolicitudes;
-
+    ArrayList <Disco> lista;
     /**
      * Creates new form DatosPlanificacionDisco
      */
     public DatosPlanificacionDisco() {
-initComponents();
-        controlador = new ControladorPlanificadorDisco();
-        tableModel = new DefaultTableModel();
-        listaSolicitudes= new ArrayList();
-        
-    }
+        initComponents();
+        lista =new ArrayList<Disco>();
+        defineAnchoTabla();
 
-    public void rellenaLista(ArrayList lista) {
-        
-        this.tableModel.setColumnIdentifiers(columnNames);
-        Object[] fila = new Object[tableModel.getColumnCount()];
-        System.out.println("");
-        
-        for (int i = 0; i < listaSolicitudes.size(); i++) {
-           int k=0;  
-             
-            lista.get(i);
-           // tableModel.addRow(fila[i]);
-            tableModel.addRow(lista.get(i),i,1);
-            
-            this.TblLista.removeAll();
-        }
-        //tableModel.addRow(lista.get(listaSolicitudes));
-        this.TblLista.setModel(tableModel);
     }
+    public void imprime(ArrayList<Disco> d){//la lista esta Guardando bien
+        for(int i=0; i<d.size();i++){
+            System.out.println(d.get(i).getData());
+            System.out.println("$$$$$$$$$$");
+        }
+    }
+    void defineAnchoTabla(){
+        TableColumn columna;
+        columna=this.TblLista.getColumnModel().getColumn(0);
+        columna.setPreferredWidth(50);
+        
+       TblLista.getTableHeader().setReorderingAllowed(false);
+       TblLista.getTableHeader().setResizingAllowed(false);
+    }
+    public void Listar(){
+        for(int i=0; i<lista.size();i++){
+            TblLista.setValueAt(lista.get(i).getData(), i, 0);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,13 +177,10 @@ initComponents();
      * @param evt
      */
     private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
-        //controlador.AgregaDatosLista(parseInt(this.txtNumeroConsulta.getText()));
-        
-        listaSolicitudes.add(txtNumeroConsulta.getText());
-        //rellena la lista
-        //rellenaLista(controlador.RetornaDatoslista());
-        rellenaLista(listaSolicitudes);
-        txtNumeroConsulta.setValue(null);
+        int d =parseInt( this.txtNumeroConsulta.getText());
+        lista.add(new Disco(d));
+        //imprime(lista);
+        Listar();
     }//GEN-LAST:event_btnAgregaActionPerformed
 
     /**
