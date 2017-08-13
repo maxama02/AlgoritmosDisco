@@ -21,28 +21,36 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      */
     public ControladorPlanificadorDisco controlador;
     DefaultTableModel tableModel;
-    String[] columnNames = {"Sol Disco"};
-    ArrayList listaSolicitudes;
+    String[] columnNames = {"Solicitudes Disco"};
+    ArrayList  listaSolicitudes;
 
     /**
      * Creates new form DatosPlanificacionDisco
      */
     public DatosPlanificacionDisco() {
-
+initComponents();
         controlador = new ControladorPlanificadorDisco();
         tableModel = new DefaultTableModel();
         listaSolicitudes= new ArrayList();
-        initComponents();
+        
     }
 
     public void rellenaLista(ArrayList lista) {
-
+        
         this.tableModel.setColumnIdentifiers(columnNames);
         Object[] fila = new Object[tableModel.getColumnCount()];
-        for (int i = 0; i < lista.size(); i++) {
-            fila[i]=lista.get(i);
-            tableModel.addRow(fila);
+        System.out.println("");
+        
+        for (int i = 0; i < listaSolicitudes.size(); i++) {
+           int k=0;  
+             
+            lista.get(i);
+           // tableModel.addRow(fila[i]);
+            tableModel.addRow(lista.get(i),i,1);
+            
+            this.TblLista.removeAll();
         }
+        //tableModel.addRow(lista.get(listaSolicitudes));
         this.TblLista.setModel(tableModel);
     }
 
