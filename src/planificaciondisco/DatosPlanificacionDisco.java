@@ -8,11 +8,11 @@ package planificaciondisco;
 import Clases.Disco;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import javax.swing.DefaultListModel;
 
 /**
- *GUI entrada datos para alimentar algoritmos
+ * GUI entrada datos para alimentar algoritmos
+ *
  * @author Max Mena
  */
 public class DatosPlanificacionDisco extends javax.swing.JFrame {
@@ -21,38 +21,33 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      * declaracion de variables
      */
     ArrayList<Disco> lista;
-    public DefaultTableModel tableModel = new DefaultTableModel();
+    //
+    DefaultListModel Modelo = new DefaultListModel();
+    String[] columnNames  = {"Numeros en disco"};
+
     /**
      * Creates new form DatosPlanificacionDisco
      */
     public DatosPlanificacionDisco() {
         initComponents();
+        Modelo.removeAllElements();
+        jList.setModel(Modelo); 
         lista = new ArrayList<Disco>();
-        defineAnchoTabla();
     }
 
-    /*public void imprime(ArrayList<Disco> d) {//la lista esta Guardando bien
-        for (int i = 0; i < d.size(); i++) {
-            System.out.println(d.get(i).getData());
-        }
-        System.out.println("$$$$$$$$$$");
-    }*/
-
-    void defineAnchoTabla() {
-        TableColumn columna;
-        columna = this.TblLista.getColumnModel().getColumn(0);
-        columna.setModelIndex(1);
-        columna.setHeaderValue("Numero Discos");
-        }
-
-    public void Listar() {
-        for (int i = 0; i < lista.size(); i++) {
-            TblLista.setValueAt(lista.get(i).getData(), i, 0);
-            //this.tableModel.addRow(lista.get(i).getData());//esto no funciona porque solo acepta vectores
-        }
+    public void Listar(ArrayList li) 
+    {        
+        Modelo.removeAllElements();
+        ArrayList<Disco> data =li;
+        for (int i = 0; i < data.size(); i++){
+            Modelo.addElement(data.get(i).getData()); 
+        } 
+        jList.setModel(Modelo); 
     }
-    public void BorrarEspacios( ){
+
+    public void BorrarEspacios() {
         this.txtNumeroConsulta.setValue(null);
+        this.txtNumeroConsulta.requestFocus();
     }
 
     /**
@@ -67,8 +62,6 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNumeroConsulta = new javax.swing.JFormattedTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TblLista = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         txtUbicCabeza = new javax.swing.JFormattedTextField();
         btnAgrega = new javax.swing.JButton();
@@ -76,6 +69,8 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         txtTamanoDisco = new javax.swing.JFormattedTextField();
         btnEjecutar = new javax.swing.JButton();
         btnBorrarTodo = new javax.swing.JButton();
+        jLista = new javax.swing.JScrollPane();
+        jList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,19 +80,6 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         jLabel2.setText("Cosultas al disco:");
 
         txtNumeroConsulta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        TblLista.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(TblLista);
 
         jLabel3.setText("Direccion de Cabeza:");
 
@@ -113,10 +95,24 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         jLabel4.setText("Tamaño del Disco:");
 
         txtTamanoDisco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtTamanoDisco.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         btnEjecutar.setText("Ejecutar");
+        btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjecutarActionPerformed(evt);
+            }
+        });
 
         btnBorrarTodo.setText("Borrar");
+
+        jList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList.setPreferredSize(new java.awt.Dimension(33, 20));
+        jLista.setViewportView(jList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,24 +120,23 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtTamanoDisco, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtUbicCabeza, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtNumeroConsulta)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnAgrega)))
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEjecutar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBorrarTodo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnBorrarTodo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgrega))
+                    .addComponent(txtTamanoDisco)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtUbicCabeza)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLista))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,17 +153,17 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgrega))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtUbicCabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEjecutar)
                     .addComponent(btnBorrarTodo))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,9 +176,14 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
         int d = parseInt(this.txtNumeroConsulta.getText());
         lista.add(new Disco(d));
-        Listar();
+        Listar(lista);
         BorrarEspacios();
+
     }//GEN-LAST:event_btnAgregaActionPerformed
+
+    private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEjecutarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,7 +221,6 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TblLista;
     private javax.swing.JButton btnAgrega;
     private javax.swing.JButton btnBorrarTodo;
     private javax.swing.JButton btnEjecutar;
@@ -229,7 +228,8 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jList;
+    private javax.swing.JScrollPane jLista;
     private javax.swing.JFormattedTextField txtNumeroConsulta;
     private javax.swing.JFormattedTextField txtTamanoDisco;
     private javax.swing.JFormattedTextField txtUbicCabeza;
