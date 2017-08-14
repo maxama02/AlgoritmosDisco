@@ -7,6 +7,7 @@ package planificaciondisco;
 
 import Clases.DatosNecesarios;
 import Clases.Disco;
+import Clases.OrdenaSegunAlgoritmos;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -32,6 +33,7 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     Integer[] listaPrueba = {98, 183, 37, 122, 14, 124, 65, 67};
     int tamano = 199;
     int cabeza = 53;
+    ArrayList <Integer> listaInt=new ArrayList <Integer>();
 
     /**
      * Creates new form DatosPlanificacionDisco
@@ -244,6 +246,13 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         if (this.txtUbicCabeza.isEditValid() && this.txtTamanoDisco.isEditValid() && 0 < this.jList.getComponentCount()) {
             datosAnalisis = new DatosNecesarios(parseInt(txtTamanoDisco.getText()), parseInt(txtUbicCabeza.getText()), lista);
             estadoEditabilidad(false);
+            
+            listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).SSF();
+            
+            for(int num:listaInt){
+                System.out.println(num);
+            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "Hace Falta algun dato.");
         }
