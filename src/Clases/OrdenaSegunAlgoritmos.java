@@ -103,5 +103,70 @@ public class OrdenaSegunAlgoritmos {
 
         return listaSSF;
     }
+    /**
+     * Acomoda la lista al estilo SCAN
+     * @return ArrayList
+     */
+    public ArrayList SCAN(){
+        int posicion;
+        int posDer;
+        int posIzq;
+        int cabeza = claseDatos.getPosicionCabeza();
+        ArrayList<Integer> lista2 = new ArrayList<>();
+        ArrayList<Integer> listaSCAN = new ArrayList<>();
+        lista2.add(cabeza);
+        lista.forEach((dis) -> {
+            lista2.add(dis.getData());
+        });
+        Collections.sort(lista2);
+
+        posicion = lista2.indexOf(cabeza);
+        posDer = posicion + 1;
+        posIzq = posicion - 1;
+        
+        while(posIzq>=0){
+            listaSCAN.add(lista2.get(posIzq));
+            posIzq--;
+        }
+        while(posDer<= lista.size()){
+            listaSCAN.add(lista2.get(posDer));
+            posDer++;
+        }
+        
+        return listaSCAN;
+    }
+    
+    /**
+     * Acomoda la lista al estilo CSCAN
+     * @return ArrayList
+     */
+    public ArrayList CSCAN(){
+        int posicion;
+        int posDer;
+        int posIzq;
+        int cabeza = claseDatos.getPosicionCabeza();
+        ArrayList<Integer> lista2 = new ArrayList<>();
+        ArrayList<Integer> listaCSCAN = new ArrayList<>();
+        lista2.add(cabeza);
+        lista.forEach((dis) -> {
+            lista2.add(dis.getData());
+        });
+        Collections.sort(lista2);
+
+        posicion = lista2.indexOf(cabeza);
+        posDer = posicion + 1;
+        posIzq = posicion - 1;
+        
+        while(posDer<= lista.size()){
+            listaCSCAN.add(lista2.get(posDer));
+            posDer++;
+        }
+        while(posIzq>=0){
+            listaCSCAN.add(lista2.get(posIzq));
+            posIzq--;
+        }
+        
+        return listaCSCAN;
+    }
 
 }

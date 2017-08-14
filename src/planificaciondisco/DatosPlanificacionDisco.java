@@ -247,7 +247,23 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
             datosAnalisis = new DatosNecesarios(parseInt(txtTamanoDisco.getText()), parseInt(txtUbicCabeza.getText()), lista);
             estadoEditabilidad(false);
             
+            //SSF
+            System.out.println("SSF");
             listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).SSF();
+            
+            for(int num:listaInt){
+                System.out.println(num);
+            }
+            //SCAN
+            System.out.println("SCAN");
+            listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).SCAN();
+            
+            for(int num:listaInt){
+                System.out.println(num);
+            }
+            //CSCAN
+            System.out.println("CSCAN");
+            listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).CSCAN();
             
             for(int num:listaInt){
                 System.out.println(num);
