@@ -44,7 +44,7 @@
                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLista" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="141" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
