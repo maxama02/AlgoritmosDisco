@@ -5,10 +5,12 @@
  */
 package planificaciondisco;
 
+import Clases.DatosNecesarios;
 import Clases.Disco;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  * GUI entrada datos para alimentar algoritmos
@@ -21,9 +23,15 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      * declaracion de variables
      */
     ArrayList<Disco> lista;
-    //
+    // Funciones para la lista
     DefaultListModel Modelo = new DefaultListModel();
-    String[] columnNames  = {"Numeros en disco"};
+    String[] columnNames = {"Numeros en disco"};
+    DatosNecesarios datosAnalisis;
+
+    //Datos de Prueba
+    Integer[] listaPrueba = {98, 183, 37, 122, 14, 124, 65, 67};
+    int tamano = 199;
+    int cabeza = 53;
 
     /**
      * Creates new form DatosPlanificacionDisco
@@ -31,23 +39,63 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     public DatosPlanificacionDisco() {
         initComponents();
         Modelo.removeAllElements();
-        jList.setModel(Modelo); 
+        jList.setModel(Modelo);
         lista = new ArrayList<Disco>();
+        probarDatos();
     }
 
-    public void Listar(ArrayList li) 
-    {        
+    /**
+     * Funcion para probar la funcionalidad del sistema
+     */
+    public void probarDatos() {
+        for (int i : listaPrueba) {
+            lista.add(new Disco(i));
+            Modelo.addElement(i);
+        }
+        txtUbicCabeza.setText("" + cabeza);
+        txtTamanoDisco.setText("" + tamano);
+        jList.setModel(Modelo);
+    }
+
+    /**
+     * LLena el JList
+     *
+     * @param li ArrayList para llenar JList
+     */
+    public void Listar(ArrayList li) {
         Modelo.removeAllElements();
-        ArrayList<Disco> data =li;
-        for (int i = 0; i < data.size(); i++){
-            Modelo.addElement(data.get(i).getData()); 
-        } 
-        jList.setModel(Modelo); 
+        ArrayList<Disco> data = li;
+        for (int i = 0; i < data.size(); i++) {
+            Modelo.addElement(data.get(i).getData());
+        }
+        jList.setModel(Modelo);
     }
 
-    public void BorrarEspacios() {
-        this.txtNumeroConsulta.setValue(null);
-        this.txtNumeroConsulta.requestFocus();
+    /**
+     * Eliminar los datos de los espacios
+     */
+    public void BorrarEspacios(String boton) {
+        if (boton.equals("Insertar")) {
+            this.txtNumeroConsulta.setValue(null);
+            this.txtNumeroConsulta.requestFocus();
+        } else if (boton.equals("Borrar")) {
+            txtUbicCabeza.setValue(null);
+            txtTamanoDisco.setValue(null);
+            txtNumeroConsulta.setValue(null);
+            Modelo.removeAllElements();
+            jList.setModel(Modelo);
+        }
+    }
+
+    /**
+     * Deshabilita la edicion en los cuadros de texto
+     *
+     * @param est
+     */
+    public void estadoEditabilidad(boolean est) {
+        txtUbicCabeza.setEnabled(est);
+        txtTamanoDisco.setEnabled(est);
+        txtNumeroConsulta.setEnabled(est);
     }
 
     /**
@@ -105,6 +153,11 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         });
 
         btnBorrarTodo.setText("Borrar");
+        btnBorrarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarTodoActionPerformed(evt);
+            }
+        });
 
         jList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -175,15 +228,31 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
      */
     private void btnAgregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregaActionPerformed
         int d = parseInt(this.txtNumeroConsulta.getText());
-        lista.add(new Disco(d));
-        Listar(lista);
-        BorrarEspacios();
+
+        if (parseInt(txtTamanoDisco.getText()) > d) {
+            lista.add(new Disco(d));
+            Listar(lista);
+        } else {
+            JOptionPane.showMessageDialog(null, "El valor ingresado no puede ser mayor que el tamaño del disco");
+        }
+        BorrarEspacios("Insertar");
 
     }//GEN-LAST:event_btnAgregaActionPerformed
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
-        // TODO add your handling code here:
+        //revisar que ninguno de los datos este vacio]
+        if (this.txtUbicCabeza.isEditValid() && this.txtTamanoDisco.isEditValid() && 0 < this.jList.getComponentCount()) {
+            datosAnalisis = new DatosNecesarios(parseInt(txtTamanoDisco.getText()), parseInt(txtUbicCabeza.getText()), lista);
+            estadoEditabilidad(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Hace Falta algun dato.");
+        }
     }//GEN-LAST:event_btnEjecutarActionPerformed
+
+    private void btnBorrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTodoActionPerformed
+        estadoEditabilidad(true);
+        BorrarEspacios("Borrar");
+    }//GEN-LAST:event_btnBorrarTodoActionPerformed
 
     /**
      * @param args the command line arguments
