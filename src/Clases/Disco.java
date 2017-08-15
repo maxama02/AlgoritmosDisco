@@ -24,7 +24,13 @@ public class Disco {
     public void setData(int Data) {
         this.Data = Data;
     }
+    
     private int Data;
+    
+    /**
+     * Clase base para lista de disco.
+     * @param data Integer
+     */
     public Disco(int data){
         this.Data=data;
     }

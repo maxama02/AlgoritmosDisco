@@ -79,7 +79,8 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     }
 
     /**
-     * Eliminar los datos de los espacios
+     * Metodo para borrar los datos de los textBox
+     * @param boton String
      */
     public void BorrarEspacios(String boton) {
         if (boton.equals("Insertar")) {

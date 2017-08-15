@@ -69,6 +69,5 @@ public class DatosNecesarios {
         posicionCabeza= pC;
         tareasDisco=LtD;
     }
-    public DatosNecesarios(){}
     
 }

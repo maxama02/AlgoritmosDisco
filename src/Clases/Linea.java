@@ -28,6 +28,7 @@ public class Linea {
      * @param tamano Tamano del disco Duro
      * @param cabecera Desde donde comienza
      * @param ancho Tamano del area de dibujo
+     * @param nombre String con el titulo del algoritmo
      */
     public Linea(ArrayList puntos, int tamano, int cabecera, int ancho, String nombre){
         this.puntos=puntos;
