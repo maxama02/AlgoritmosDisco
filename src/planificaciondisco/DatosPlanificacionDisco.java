@@ -8,7 +8,6 @@ package planificaciondisco;
 import Clases.DatosNecesarios;
 import Clases.Disco;
 import Clases.OrdenaSegunAlgoritmos;
-import java.awt.Graphics;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -252,6 +251,16 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         if (this.txtUbicCabeza.isEditValid() && this.txtTamanoDisco.isEditValid() && 0 < this.jList.getComponentCount()) {
             datosAnalisis = new DatosNecesarios(parseInt(txtTamanoDisco.getText()), parseInt(txtUbicCabeza.getText()), lista);
             
+            //FIFO
+            System.out.println("FIFO");
+            listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).FIFO();
+            
+            for(int num:listaInt){
+                System.out.println(num);
+            }
+            mLineas = new MarcoLineas(listaInt,parseInt(this.txtTamanoDisco.getText()),parseInt(this.txtUbicCabeza.getText()),"FIFO");
+            mLineas.setVisible(true);
+            
             //SSF
             System.out.println("SSF");
             listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).SSF();
@@ -259,24 +268,27 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
             for(int num:listaInt){
                 System.out.println(num);
             }
-            /*//SCAN
+            mLineas = new MarcoLineas(listaInt,parseInt(this.txtTamanoDisco.getText()),parseInt(this.txtUbicCabeza.getText()),"SSF");
+            mLineas.setVisible(true);
+            
+            //SCAN
             System.out.println("SCAN");
             listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).SCAN();
             
             for(int num:listaInt){
                 System.out.println(num);
             }
+            mLineas = new MarcoLineas(listaInt,parseInt(this.txtTamanoDisco.getText()),parseInt(this.txtUbicCabeza.getText()),"SCAN");
+            mLineas.setVisible(true);
+            
             //CSCAN
             System.out.println("CSCAN");
             listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).CSCAN();
             
             for(int num:listaInt){
                 System.out.println(num);
-            }*/
-            
-            //llamado de datos
-            mLineas = new MarcoLineas(listaInt,parseInt(this.txtTamanoDisco.getText()),parseInt(this.txtUbicCabeza.getText()));
-            //this.getContentPane().add(di).setVisible(true);
+            }
+            mLineas = new MarcoLineas(listaInt,parseInt(this.txtTamanoDisco.getText()),parseInt(this.txtUbicCabeza.getText()),"CSCAN");
             mLineas.setVisible(true);
             
             estadoEditabilidad(false);

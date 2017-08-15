@@ -40,7 +40,11 @@ public class OrdenaSegunAlgoritmos {
      * @return ArrayList
      */
     public ArrayList FIFO() {
-        return claseDatos.getTareasDisco();
+        ArrayList <Integer> lista2 = new ArrayList <Integer>();
+        lista.forEach((dis) -> {
+            lista2.add(dis.getData());
+        });
+        return lista2;
     }
 
     /**

@@ -7,6 +7,7 @@ package Clases;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import static java.lang.Math.abs;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,8 @@ public class Linea {
      * Declaracion de variable
      */
     private ArrayList <Integer> puntos;
-    private int tamano, cabecera, separacion,lineaNum, ajustador;
+    private int tamano, cabecera, separacion,lineaNum, ajustador,aumen,movimiento;
+    private String titulo;
     
     /**
      * Constructor de la imagen 
@@ -27,18 +29,20 @@ public class Linea {
      * @param cabecera Desde donde comienza
      * @param ancho Tamano del area de dibujo
      */
-    public Linea(ArrayList puntos, int tamano, int cabecera, int ancho){
+    public Linea(ArrayList puntos, int tamano, int cabecera, int ancho, String nombre){
         this.puntos=puntos;
         this.tamano=tamano;
         this.cabecera=cabecera;
         separacion=5;
         lineaNum=100;
         ajustador=ancho/tamano;
+        aumen=10;
+        this.titulo=nombre;
     }
    
     /**
-     * Prueba para generar lineas apartir de Xy Y definidos previamente
-     * @param g 
+     * Dibujar es el algorit
+     * @param g elemento grafico
      */
     public void Dibujar(Graphics g){
         g.setColor(Color.white);
@@ -47,12 +51,16 @@ public class Linea {
         int linea;
         for (int pt:puntos){
             linea=pt*ajustador;
-            g.drawLine(anter, separacion, linea, separacion+5);
-            separacion+=5;
-            g.drawString("|", linea, separacion-2);
+            g.drawLine(anter, separacion, linea, separacion+aumen);
+            separacion+=aumen;
+            g.drawString("*", linea, separacion+5);
             g.drawString(pt+"", linea, lineaNum);
-            pAnt=pt;
+            movimiento+=abs(anter-linea)/ajustador;
+            anter=linea;
         }
+        
+        g.drawString(titulo, lineaNum, lineaNum+lineaNum);
+        g.drawString("Movimientos: "+movimiento, lineaNum+(lineaNum/2), lineaNum+lineaNum);
     }
     
 }

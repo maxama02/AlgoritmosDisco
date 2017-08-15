@@ -5,7 +5,6 @@
  */
 package planificaciondisco;
 
-import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 
 /**
@@ -24,8 +23,15 @@ public class MarcoLineas extends javax.swing.JFrame {
     public MarcoLineas() {
         initComponents();
     }
-    public MarcoLineas(ArrayList listaInt, int TamanoDisco,int UbicCabeza){
-        panel = new PanelLineas(listaInt,TamanoDisco,UbicCabeza);
+    /**
+     * Constructor
+     * @param listaInt ArrayList
+     * @param TamanoDisco Integer
+     * @param UbicCabeza Integer
+     * @param nombre String
+     */
+    public MarcoLineas(ArrayList listaInt, int TamanoDisco,int UbicCabeza, String nombre){
+        panel = new PanelLineas(listaInt,TamanoDisco,UbicCabeza, nombre);
         initComponents();
         this.getContentPane().add(panel).setVisible(true);;
     }
