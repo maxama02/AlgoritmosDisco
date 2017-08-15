@@ -37,7 +37,7 @@ public class OrdenaSegunAlgoritmos {
     /**
      * Clase FIFO no modifica nada
      *
-     * @return
+     * @return ArrayList
      */
     public ArrayList FIFO() {
         return claseDatos.getTareasDisco();
@@ -46,7 +46,7 @@ public class OrdenaSegunAlgoritmos {
     /**
      * Clase que ordena la Lista con base en la posicion de la cabeza
      *
-     * @return
+     * @return ArrayList
      */
     public ArrayList SSF() {
         int posicion;

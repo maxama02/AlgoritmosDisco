@@ -8,6 +8,7 @@ package planificaciondisco;
 import Clases.DatosNecesarios;
 import Clases.Disco;
 import Clases.OrdenaSegunAlgoritmos;
+import java.awt.Graphics;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -34,6 +35,11 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
     int tamano = 199;
     int cabeza = 53;
     ArrayList <Integer> listaInt=new ArrayList <Integer>();
+    
+    //Datos para grafico
+    //PanelLineas di;
+    MarcoLineas mLineas;
+    
 
     /**
      * Creates new form DatosPlanificacionDisco
@@ -245,7 +251,6 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
         //revisar que ninguno de los datos este vacio]
         if (this.txtUbicCabeza.isEditValid() && this.txtTamanoDisco.isEditValid() && 0 < this.jList.getComponentCount()) {
             datosAnalisis = new DatosNecesarios(parseInt(txtTamanoDisco.getText()), parseInt(txtUbicCabeza.getText()), lista);
-            estadoEditabilidad(false);
             
             //SSF
             System.out.println("SSF");
@@ -254,7 +259,7 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
             for(int num:listaInt){
                 System.out.println(num);
             }
-            //SCAN
+            /*//SCAN
             System.out.println("SCAN");
             listaInt=new OrdenaSegunAlgoritmos(datosAnalisis).SCAN();
             
@@ -267,8 +272,14 @@ public class DatosPlanificacionDisco extends javax.swing.JFrame {
             
             for(int num:listaInt){
                 System.out.println(num);
-            }
+            }*/
             
+            //llamado de datos
+            mLineas = new MarcoLineas(listaInt,parseInt(this.txtTamanoDisco.getText()),parseInt(this.txtUbicCabeza.getText()));
+            //this.getContentPane().add(di).setVisible(true);
+            mLineas.setVisible(true);
+            
+            estadoEditabilidad(false);
         } else {
             JOptionPane.showMessageDialog(null, "Hace Falta algun dato.");
         }
